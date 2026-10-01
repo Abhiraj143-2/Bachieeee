@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#09030a">
+<title>For Saba — A Little Birthday Surprise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09030a; --rose:#ff668f; --pink:#ffb1c7; --cream:#fff4f6;
+  --muted:#d7bfc7; --glass:rgba(255,255,255,.075);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:#fff;scroll-behavior:smooth}
+body{font-family:"DM Sans",system-ui,sans-serif;overflow-x:hidden}
+button{font:inherit}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#ff5c8a,#ffd1dc);z-index:50;box-shadow:0 0 16px #ff6a95}
+nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:9px}
+.dot{width:8px;height:8px;border:0;border-radius:50%;background:#ffffff44;padding:0;cursor:pointer;transition:.25s}
+.dot.active{background:#fff;box-shadow:0 0 14px #ff7fa1;transform:scale(1.5)}
+section{position:relative;z-index:1;min-height:100svh;padding:70px 8vw;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.wrap{width:min(1050px,100%);margin:auto}
+.center{text-align:center}
+.kicker{font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:#ffb5c9;margin-bottom:16px}
+h1,h2{font-family:"Cormorant Garamond",serif;margin:0}
+h1{font-size:clamp(4rem,13vw,9rem);line-height:.78;font-weight:500}
+h2{font-size:clamp(2.7rem,7vw,5.7rem);line-height:.9;font-weight:500}
+p{font-size:clamp(1rem,2vw,1.25rem);line-height:1.8;color:var(--muted);max-width:720px;margin:22px auto}
+.script{font-family:"Great Vibes",cursive;color:#ffb1c7;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:400}
+.btn{border:1px solid #ffffff3a;background:#ffffff12;color:white;border-radius:999px;padding:13px 22px;cursor:pointer;backdrop-filter:blur(12px);transition:.25s}
+.btn:hover{transform:translateY(-2px);background:#ffffff20}
+.hero{background:radial-gradient(circle at 50% 30%,#5b142b 0,#180711 35%,#09030a 72%)}
+.hero-card{position:relative;text-align:center}
+.hero-card:after{content:"";position:absolute;inset:-30px;border-radius:50%;background:#ff507c18;filter:blur(35px);z-index:-1}
+.heart-big{font-size:clamp(3rem,8vw,6rem);animation:pulse 1.7s infinite;display:block;margin-bottom:15px}
+@keyframes pulse{50%{transform:scale(1.08);filter:drop-shadow(0 0 22px #ff5f8b)}}
+.photo-frame{position:relative;width:min(420px,90vw);margin:25px auto 0;padding:10px;background:linear-gradient(135deg,#ffffff28,#ffffff08);border:1px solid #ffffff24;border-radius:22px;box-shadow:0 30px 80px #0009}
+.photo-frame img{display:block;width:100%;border-radius:15px;max-height:65svh;object-fit:cover}
+.caption{margin-top:14px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#dcbfc9}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+@media(max-width:760px){.split{grid-template-columns:1fr;gap:25px}nav{right:8px}.split .photo-frame{order:-1}}
+.glass{background:linear-gradient(145deg,#ffffff10,#ffffff04);border:1px solid #ffffff1c;border-radius:28px;padding:30px;box-shadow:0 25px 70px #0008;backdrop-filter:blur(12px)}
+.memory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+@media(max-width:650px){.memory-grid{grid-template-columns:1fr}}
+.memory-grid video{width:100%;height:380px;object-fit:cover;border-radius:20px;background:#12060d;border:1px solid #ffffff1c;box-shadow:0 20px 50px #0008}
+.memory-label{margin:10px 4px 20px;color:#dcbfc9;font-size:.9rem}
+.quote{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,4vw,3rem);line-height:1.25;color:#fff;max-width:800px;margin:0 auto}
+.final{background:radial-gradient(circle at 50% 50%,#681630 0,#210914 35%,#09030a 75%)}
+.firework-title{font-size:clamp(3.2rem,10vw,7rem)}
+.question{font-family:"Great Vibes",cursive;font-size:clamp(3.3rem,9vw,7rem);color:#ffc0d0;line-height:1.05;margin:25px 0}
+.tap{margin-top:30px}
+.small{font-size:.85rem;color:#bda5ad}
+.reveal{opacity:0;transform:translateY(28px);transition:1s ease}
+.reveal.show{opacity:1;transform:none}
+.fadein{animation:fadein 1.4s ease both}
+@keyframes fadein{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.scrollhint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#bda5ad}
+.firework-word{display:inline-block;animation:glow 1.6s ease-in-out infinite alternate}
+@keyframes glow{from{text-shadow:0 0 10px #ff6a93}to{text-shadow:0 0 35px #ff6a93,0 0 70px #ff315f}}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="progress" id="progress"></div>
+<nav id="dots" aria-label="Slides"></nav>
+
+<section class="hero" id="s1">
+  <div class="wrap center hero-card fadein">
+    <span class="heart-big">♡</span>
+    <div class="kicker">A little surprise, made just for you</div>
+    <h1>Happy<br><span class="script">Birthday</span></h1>
+    <p>Some people quietly become a very special part of our story.</p>
+    <button class="btn tap" onclick="go(1)">Open your surprise →</button>
+  </div>
+  <div class="scrollhint">scroll / tap to continue</div>
+</section>
+
+<section id="s2">
+  <div class="wrap center reveal">
+    <div class="kicker">For the birthday girl</div>
+    <h2>Happy Birthday,<br><span class="script">Saba</span> 🧿</h2>
+    <p class="quote">“And once again… Happy Birthday to myyy as a friend lovee 💗🫶🏻”</p>
+    <div class="photo-frame"><img src="hero.jpg" alt="Saba by a lake"></div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="wrap split reveal">
+    <div>
+      <div class="kicker">A little piece of my heart</div>
+      <h2>My love for you,<br><span class="script">meri bhutki</span></h2>
+      <p>My love for you, meri bhutki, feels like the softest dawn after the longest night. Every shared silence speaks louder than words, and your laughter is my favorite melody. I cherish the way you complete my sentences and understand my soul.</p>
+    </div>
+    <div class="photo-frame"><img src="dress-photo.jpg" alt="Saba dressed up"></div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="wrap center reveal">
+    <div class="kicker">One promise</div>
+    <div class="glass">
+      <span class="heart-big">♡</span>
+      <h2>I love you, Saba,<br><span class="script">so much</span> 🫠🫶🏻</h2>
+      <p>I promise I will never break your trust again.</p>
+      <p class="small">“I know, I am not your permanent person… but if you want, I will 🫠🫠”</p>
+    </div>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="wrap center reveal">
+    <div class="kicker">Then, somehow</div>
+    <h2>From strangers<br>to something special.</h2>
+    <p>We started as strangers, but our conversations became a gentle dance of discovery. Each shared secret and quiet smile built a bridge between our hearts.</p>
+    <div class="photo-frame"><img src="little-saba.jpg" alt="Saba as a child"></div>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="wrap reveal">
+    <div class="kicker center">Little memories</div>
+    <h2 class="center">Moments worth keeping ✨</h2>
+    <div class="memory-grid">
+      <div><video src="memory-1.mp4" controls playsinline preload="metadata"></video><div class="memory-label">A little smile.</div></div>
+      <div><video src="memory-2.mp4" controls playsinline preload="metadata"></video><div class="memory-label">A little moment.</div></div>
+      <div><video src="memory-3.mp4" controls playsinline preload="metadata"></video><div class="memory-label">A little memory.</div></div>
+      <div><video src="memory-4.mp4" controls playsinline preload="metadata"></video><div class="memory-label">And another reason to smile.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="wrap center reveal">
+    <div class="kicker">What I adore</div>
+    <h2>Your dreams.<br>Your smile.<br><span class="script">Your presence.</span></h2>
+    <p>I adore the way your eyes sparkle when you talk about your dreams, and how your presence makes even ordinary moments feel extraordinary.</p>
+    <p>I will never forget that day when you made a stranger like me a special part of your life.</p>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="wrap center reveal">
+    <div class="kicker">A wish for 2026</div>
+    <h2>Sunrise to sunset,<br><span class="script">together.</span></h2>
+    <p>I dream of 2026 with you, building a world where every sunrise and sunset is ours, painting our future in shades of forever.</p>
+    <div class="glass" style="margin-top:30px">
+      <div class="quote">“May this new year of your life bring you the kind of happiness that stays.”</div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="s9">
+  <div class="wrap center reveal">
+    <div class="kicker">One last thing…</div>
+    <h2 class="firework-title"><span class="firework-word">HAPPY</span><br><span class="script">BIRTHDAY</span></h2>
+    <p>For the girl who deserves a beautiful day and a thousand reasons to smile. 🧿💗</p>
+    <div class="question">Will you be my forever as a friend? 💓</div>
+    <button class="btn" onclick="celebrate()">Make it sparkle ✨</button>
+    <p class="small" id="ending"></p>
+  </div>
+</section>
+
+<script>
+const sections=[...document.querySelectorAll("section")];
+const dots=document.getElementById("dots");
+sections.forEach((s,i)=>{
+  const b=document.createElement("button");
+  b.className="dot"+(i===0?" active":"");
+  b.title="Slide "+(i+1);
+  b.onclick=()=>s.scrollIntoView({behavior:"smooth"});
+  dots.appendChild(b);
+});
+const dotEls=[...document.querySelectorAll(".dot")];
+const progress=document.getElementById("progress");
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll(".reveal").forEach(x=>x.classList.add("show"));
+      const i=sections.indexOf(e.target);
+      dotEls.forEach((d,j)=>d.classList.toggle("active",j===i));
+    }
+  });
+},{threshold:.45});
+sections.forEach(s=>obs.observe(s));
+
+function go(i){sections[i+1]?.scrollIntoView({behavior:"smooth"});}
+window.addEventListener("scroll",()=>{
+  const max=document.documentElement.scrollHeight-innerHeight;
+  progress.style.width=(scrollY/max*100)+"%";
+});
+
+// Soft floating hearts + stars.
+const canvas=document.getElementById("particles"),ctx=canvas.getContext("2d");
+let W,H,parts=[];
+function resize(){W=canvas.width=innerWidth*devicePixelRatio;H=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+"px";canvas.style.height=innerHeight+"px";ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);}
+function seed(){parts=Array.from({length:55},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+.5,v:Math.random()*.35+.08,a:Math.random()*.7+.2,heart:Math.random()<.12}));}
+function draw(){
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+  parts.forEach(p=>{
+    p.y-=p.v;if(p.y<-20)p.y=innerHeight+20;
+    ctx.globalAlpha=p.a;
+    if(p.heart){
+      ctx.font="16px serif";ctx.fillText("♡",p.x,p.y);
+    }else{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="#ffd5df";ctx.fill();}
+  });
+  requestAnimationFrame(draw);
+}
+resize();seed();draw();addEventListener("resize",()=>{resize();seed();});
+
+function celebrate(){
+  const duration=3600,start=performance.now();
+  const bursts=[];
+  for(let i=0;i<7;i++) bursts.push({x:innerWidth*(.12+Math.random()*.76),y:innerHeight*(.18+Math.random()*.4),t:performance.now()+i*220});
+  function burst(x,y){
+    const ps=Array.from({length:80},()=>({x,y,v:Math.random()*5+2,a:1,ang:Math.random()*Math.PI*2}));
+    function frame(){
+      ps.forEach(p=>{p.x+=Math.cos(p.ang)*p.v;p.y+=Math.sin(p.ang)*p.v;p.v*=.97;p.a*=.96;});
+      ctx.clearRect(0,0,innerWidth,innerHeight);
+      parts.forEach(p=>{ctx.globalAlpha=p.a;ctx.fillStyle="#ffd5df";ctx.fillRect(p.x,p.y,p.r,p.r);});
+      ps.forEach(p=>{ctx.globalAlpha=p.a;ctx.fillStyle="#fff";ctx.beginPath();ctx.arc(p.x,p.y,2,0,7);ctx.fill();});
+      if(ps.some(p=>p.a>.05))requestAnimationFrame(frame);
+    } frame();
+  }
+  bursts.forEach((b,i)=>setTimeout(()=>burst(b.x,b.y),i*220));
+  document.getElementById("ending").textContent="✨ A tiny sky full of wishes, just for you. ✨";
+}
+</script>
+</body>
+</html>
